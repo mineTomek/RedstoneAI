@@ -1,5 +1,5 @@
 import Block from './Block'
-import WoolBlockRenderer from './Renderers/WoolBlockRenderer'
+import WoolBlockRenderer from './renderers/WoolBlockRenderer'
 
 export default class WoolBlock extends Block {
   renderer = WoolBlockRenderer

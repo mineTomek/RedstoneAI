@@ -1,7 +1,7 @@
 import BlockState from '../BlockState'
 import Position from '../Position'
 import World from '../World'
-import { Renderer } from './Renderers/Renderer'
+import { Renderer } from './renderers/Renderer'
 
 export default abstract class Block {
   blockState: BlockState

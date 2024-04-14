@@ -1,5 +1,5 @@
 import Block from './Block'
-import RedstoneTorchRenderer from './Renderers/RedstoneTorchRenderer'
+import RedstoneTorchRenderer from './renderers/RedstoneTorchRenderer'
 
 export default class RedstoneTorch extends Block {
   renderer = RedstoneTorchRenderer
