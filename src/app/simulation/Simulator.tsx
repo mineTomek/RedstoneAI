@@ -4,9 +4,7 @@ import { OrbitControls } from '@react-three/drei'
 import { Canvas, Vector3 as Vector3Fiber } from '@react-three/fiber'
 import { useState } from 'react'
 import useSWR from 'swr'
-import SimulationBlock, { Facing } from './SimulationBlock'
-import Block from './blocks/Block'
-import RedstoneTorch from './blocks/RedstoneTorch'
+import { SimulatorUtils } from './utils/SimulatorUtils'
 
 const fetcher = (url: string) => fetch(url).then(res => res.json())
 
@@ -16,7 +14,7 @@ export default function Simulator(props: {
 }) {
   const [autoRotate, setAutoRotate] = useState(true)
 
-  const [clickedBlock, setClickedBlock] = useState(-1)
+  const [selectedBlock, setSelectedBlock] = useState(-1)
 
   let minPos: Vector3Fiber = [100, 100, 100]
 
@@ -31,55 +29,40 @@ export default function Simulator(props: {
 
   if (!data) return <div>Loading circuit...</div>
 
-  let blocks: SimulationBlock[] = []
-
-  let jsonObject = data.blocks as { type: string; data: SimulationBlock }[]
-
-  jsonObject.forEach(jsonBlock => {
-    switch (jsonBlock.type) {
-      case 'redstone_torch':
-        blocks.push(new RedstoneTorch(jsonBlock.data.position, Facing.Down))
-        break
-      default:
-        blocks.push(
-          new Block(jsonBlock.data.position, jsonBlock.data.colorGroup)
-        )
-    }
-  })
+  let blocks = SimulatorUtils.createBlocks(data)
 
   blocks.forEach(block => {
     if (block.position < minPos) {
-      minPos = block.position
+      minPos = block.position as Vector3Fiber
     }
     if (block.position > maxPos) {
-      maxPos = block.position
+      maxPos = block.position as Vector3Fiber
     }
   })
 
-  const minPosArr = minPos as number[]
-  const maxPosArr = maxPos as number[]
+  const minPosArray = minPos as number[]
+  const maxPosArray = maxPos as number[]
 
-  let centerPos: Vector3Fiber = [
-    (minPosArr[0] + maxPosArr[0]) / 2,
-    (minPosArr[1] + maxPosArr[1]) / 2,
-    (minPosArr[2] + maxPosArr[2]) / 2,
-  ]
+  let centerPos = SimulatorUtils.calculateCenterPosition(
+    maxPosArray,
+    maxPosArray
+  )
 
-  const cameraDistance =
-    Math.max(
-      maxPosArr[0] - minPosArr[0],
-      maxPosArr[1] - minPosArr[1],
-      maxPosArr[2] - minPosArr[2]
-    ) + 1
+  let centerPosArray = centerPos as number[]
+
+  const cameraDistance = SimulatorUtils.calculateCameraDistance(
+    minPosArray,
+    maxPosArray
+  )
 
   return (
     <Canvas
       onPointerLeave={() => setAutoRotate(true)}
       camera={{
         position: [
-          centerPos[0] + cameraDistance,
-          centerPos[1],
-          centerPos[2] + cameraDistance,
+          centerPosArray[0] + cameraDistance,
+          centerPosArray[1],
+          centerPosArray[2] + cameraDistance,
         ],
         near: 0.01,
       }}
@@ -97,7 +80,7 @@ export default function Simulator(props: {
         target={centerPos}
         minDistance={
           process.env.NODE_ENV == 'production'
-            ? Math.max(maxPosArr[0], maxPosArr[1], maxPosArr[2]) + 2
+            ? Math.max(maxPosArray[0], maxPosArray[1], maxPosArray[2]) + 2
             : 0.1
         }
       />
@@ -108,8 +91,8 @@ export default function Simulator(props: {
             block={block}
             click={{
               setClicked: clicked =>
-                clicked ? setClickedBlock(i) : setClickedBlock(-1),
-              clicked: clickedBlock === i,
+                clicked ? setSelectedBlock(i) : setSelectedBlock(-1),
+              clicked: selectedBlock === i,
             }}
           />
         )

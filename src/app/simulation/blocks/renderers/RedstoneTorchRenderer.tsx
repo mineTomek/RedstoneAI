@@ -1,9 +1,9 @@
 import { useGLTF } from '@react-three/drei'
+import { ObjectMap, Vector3 } from '@react-three/fiber'
 import { useState } from 'react'
 import * as THREE from 'three'
 import { GLTF } from 'three-stdlib'
 import SimulationBlock from '../../SimulationBlock'
-import { ObjectMap } from '@react-three/fiber'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -37,7 +37,7 @@ export default function RedstoneTorchRenderer(props: {
 
   return (
     <group
-      position={props.block.position}
+      position={props.block.position as Vector3}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
       onClick={event => {
