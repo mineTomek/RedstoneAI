@@ -1,30 +1,179 @@
 {
   "blocks": [
     {
-      "type": "block",
-      "data": {
-        "position": [0, 0, 0],
-        "colorGroup": "0"
+      "id": "block",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "state": {
+        "color": 2
       }
     },
     {
-      "type": "block",
-      "data": {
-        "position": [0, 1, 0],
-        "colorGroup": "1"
+      "id": "block",
+      "position": {
+        "x": 0,
+        "y": 1,
+        "z": 0
+      },
+      "state": {
+        "color": 1
       }
     },
     {
-      "type": "block",
-      "data": {
-        "position": [0, 2, 0],
-        "colorGroup": "2"
+      "id": "block",
+      "position": {
+        "x": 0,
+        "y": 2,
+        "z": 0
+      },
+      "state": {
+        "color": 0
       }
     },
     {
-      "type": "redstone_torch",
-      "data": {
-        "position": [0, 3, 0]
+      "id": "block",
+      "position": {
+        "x": 1,
+        "y": 2,
+        "z": 0
+      },
+      "state": {
+        "color": 6
+      }
+    },
+    {
+      "id": "block",
+      "position": {
+        "x": 2,
+        "y": 2,
+        "z": 0
+      },
+      "state": {
+        "color": 5
+      }
+    },
+    {
+      "id": "block",
+      "position": {
+        "x": 3,
+        "y": 2,
+        "z": 0
+      },
+      "state": {
+        "color": 4
+      }
+    },
+    {
+      "id": "block",
+      "position": {
+        "x": 3,
+        "y": 1,
+        "z": 0
+      },
+      "state": {
+        "color": 12
+      }
+    },
+    {
+      "id": "block",
+      "position": {
+        "x": 3,
+        "y": 0,
+        "z": 0
+      },
+      "state": {
+        "color": 13
+      }
+    },
+    {
+      "id": "block",
+      "position": {
+        "x": 2,
+        "y": 0,
+        "z": 0
+      },
+      "state": {
+        "color": 14
+      }
+    },
+    {
+      "id": "block",
+      "position": {
+        "x": -1,
+        "y": 2,
+        "z": 0
+      },
+      "state": {
+        "color": 8
+      }
+    },
+    {
+      "id": "block",
+      "position": {
+        "x": -2,
+        "y": 2,
+        "z": 0
+      },
+      "state": {
+        "color": 7
+      }
+    },
+    {
+      "id": "block",
+      "position": {
+        "x": -3,
+        "y": 2,
+        "z": 0
+      },
+      "state": {
+        "color": 9
+      }
+    },
+    {
+      "id": "block",
+      "position": {
+        "x": -3,
+        "y": 1,
+        "z": 0
+      },
+      "state": {
+        "color": 10
+      }
+    },
+    {
+      "id": "block",
+      "position": {
+        "x": -3,
+        "y": 0,
+        "z": 0
+      },
+      "state": {
+        "color": 11
+      }
+    },
+    {
+      "id": "block",
+      "position": {
+        "x": -2,
+        "y": 0,
+        "z": 0
+      },
+      "state": {
+        "color": 15
+      }
+    },
+    {
+      "id": "redstone_torch",
+      "position": {
+        "x": 0,
+        "y": 3,
+        "z": 0
+      },
+      "state": {
+        "lit": false
       }
     }
   ]

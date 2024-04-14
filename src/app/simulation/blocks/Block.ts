@@ -1,23 +1,24 @@
-import SimulationBlock, { Facing } from '../SimulationBlock'
-import BlockRenderer from './renderers/BlockRenderer'
+import BlockState from '../BlockState'
+import Position from '../Position'
+import World from '../World'
+import { Renderer } from './Renderers/Renderer'
 
-export default class Block implements SimulationBlock {
-  position = [0, 0, 0]
+export default abstract class Block {
+  blockState: BlockState
+  blockPos: Position
 
-  colorGroup?: number = 0
-  renderer = BlockRenderer
+  abstract transparent: boolean
 
-  facing?: Facing = undefined
-  state?: boolean = undefined
-  locked?: boolean = undefined
-  subtract?: boolean = undefined
+  world: World
 
-  constructor(position: number[], colorGroup?: number) {
-    this.position = position
-    this.colorGroup = colorGroup
+  abstract renderer: Renderer
+
+  constructor(blockState: BlockState, blockPos: Position, world: World) {
+    this.blockState = blockState
+    this.blockPos = blockPos
+    this.world = world
   }
 
-  use(): void {
-    throw new Error('Method not implemented.')
-  }
+  abstract getName(): string
+  abstract onUse(): void
 }

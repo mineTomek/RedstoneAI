@@ -1,9 +1,9 @@
-import { useGLTF } from '@react-three/drei'
-import { ObjectMap, Vector3 } from '@react-three/fiber'
-import { useState } from 'react'
+import { Edges, useGLTF } from '@react-three/drei'
+import { ObjectMap } from '@react-three/fiber'
+import { useReducer, useState } from 'react'
 import * as THREE from 'three'
 import { GLTF } from 'three-stdlib'
-import SimulationBlock from '../../SimulationBlock'
+import Block from '../Block'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -20,34 +20,60 @@ type GLTFResult = GLTF & {
 }
 
 export default function RedstoneTorchRenderer(props: {
-  block: SimulationBlock
-  click: { setClicked: (clicked: boolean) => void; clicked: boolean }
+  block: Block
+  selection: { setSelected: (selected: boolean) => void; selected: boolean }
 }) {
   const [hovered, setHovered] = useState(false)
 
-  const color = props.click.clicked ? 0xff88ff : hovered ? 0xffffff : 0x888888
+  const [_, forceUpdate] = useReducer(x => x + 1, 0)
+
+  const pixelSize = 1 / 16
 
   const { nodes } = useGLTF(
-    `assets/models/redstone_torch_${hovered ? 'on' : 'off'}.gltf`
+    `assets/models/redstone_torch_${
+      props.block.blockState.lit ?? false ? 'on' : 'off'
+    }.gltf`
   ) as GLTFResult & ObjectMap
 
   ;(nodes.body.material as THREE.MeshStandardMaterial).color = new THREE.Color(
-    color
+    0xffffff
   )
 
   return (
     <group
-      position={props.block.position as Vector3}
-      onPointerOver={() => setHovered(true)}
+      position={props.block.blockPos.convertToVector()}
+      onPointerEnter={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
       onClick={event => {
         event.stopPropagation()
         if (event.shiftKey) {
-          props.click.setClicked(!props.click.clicked)
+          props.selection.setSelected(!props.selection.selected)
+        } else {
+          props.block.blockState.lit = !props.block.blockState.lit
+
+          forceUpdate()
         }
       }}
       dispose={null}
     >
+      <mesh position={[0, -2.5 * pixelSize, 0]}>
+        <boxGeometry args={[4 * pixelSize, 11 * pixelSize, 4 * pixelSize]} />
+        <meshStandardMaterial
+          color={0x6dc53}
+          visible={false}
+        />
+        <Edges
+          visible={props.selection.selected}
+          scale={1}
+          renderOrder={1000}
+        >
+          <meshBasicMaterial
+            transparent
+            color='#000'
+            depthTest={false}
+          />
+        </Edges>
+      </mesh>
       <group position={[-0.5, -0.5, -0.5]}>
         <mesh
           castShadow

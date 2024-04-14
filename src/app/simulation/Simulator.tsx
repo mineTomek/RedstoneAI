@@ -1,10 +1,11 @@
 'use client'
 
 import { OrbitControls } from '@react-three/drei'
-import { Canvas, Vector3 as Vector3Fiber } from '@react-three/fiber'
-import { useState } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { useRef, useState } from 'react'
 import useSWR from 'swr'
-import { SimulatorUtils } from './utils/SimulatorUtils'
+import Circuit from './Circuit'
+import World from './World'
 
 const fetcher = (url: string) => fetch(url).then(res => res.json())
 
@@ -13,58 +14,40 @@ export default function Simulator(props: {
   className?: string
 }) {
   const [autoRotate, setAutoRotate] = useState(true)
-
   const [selectedBlock, setSelectedBlock] = useState(-1)
 
-  let minPos: Vector3Fiber = [100, 100, 100]
-
-  let maxPos: Vector3Fiber = [-100, -100, -100]
+  const world = useRef(new World())
 
   const { data, error } = useSWR(
     '/api/prebuilt?circuit=' + props.circuit,
     fetcher
   )
 
-  if (error) return <div>Failed to load circuit</div>
+  if (error) {
+    return (
+      <div className='flex justify-center items-center'>
+        Failed to load circuit
+      </div>
+    )
+  }
 
-  if (!data) return <div>Loading circuit...</div>
+  if (!data) {
+    return (
+      <div className='flex justify-center items-center'>Loading circuit...</div>
+    )
+  }
 
-  let blocks = SimulatorUtils.createBlocks(data)
+  world.current.initBlocks(Circuit.fromJSON(data))
 
-  blocks.forEach(block => {
-    if (block.position < minPos) {
-      minPos = block.position as Vector3Fiber
-    }
-    if (block.position > maxPos) {
-      maxPos = block.position as Vector3Fiber
-    }
-  })
-
-  const minPosArray = minPos as number[]
-  const maxPosArray = maxPos as number[]
-
-  let centerPos = SimulatorUtils.calculateCenterPosition(
-    maxPosArray,
-    maxPosArray
-  )
-
-  let centerPosArray = centerPos as number[]
-
-  const cameraDistance = SimulatorUtils.calculateCameraDistance(
-    minPosArray,
-    maxPosArray
-  )
+  const { centerPos, cameraPos, circuitBounds } =
+    world.current.getCameraSettings(3)
 
   return (
     <Canvas
       onPointerLeave={() => setAutoRotate(true)}
       camera={{
-        position: [
-          centerPosArray[0] + cameraDistance,
-          centerPosArray[1],
-          centerPosArray[2] + cameraDistance,
-        ],
         near: 0.01,
+        position: cameraPos.convertToVector(),
       }}
       className={props.className}
     >
@@ -77,22 +60,26 @@ export default function Simulator(props: {
         autoRotate={autoRotate}
         autoRotateSpeed={2}
         onStart={() => setAutoRotate(false)}
-        target={centerPos}
+        target={centerPos.convertToVector()}
         minDistance={
           process.env.NODE_ENV == 'production'
-            ? Math.max(maxPosArray[0], maxPosArray[1], maxPosArray[2]) + 2
+            ? Math.max(
+                circuitBounds?.maxPos.x ?? 0,
+                circuitBounds?.maxPos.y ?? 0,
+                circuitBounds?.maxPos.z ?? 0
+              ) + 2
             : 0.1
         }
       />
-      {blocks.map((block, i) => {
+      {world.current.getBlocks().map((block, i) => {
         return (
           <block.renderer
             key={`block_${i}`}
             block={block}
-            click={{
-              setClicked: clicked =>
-                clicked ? setSelectedBlock(i) : setSelectedBlock(-1),
-              clicked: selectedBlock === i,
+            selection={{
+              setSelected: selected =>
+                selected ? setSelectedBlock(i) : setSelectedBlock(-1),
+              selected: selectedBlock === i,
             }}
           />
         )

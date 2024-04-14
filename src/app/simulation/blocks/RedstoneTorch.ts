@@ -1,23 +1,16 @@
-import SimulationBlock, { Facing } from '../SimulationBlock'
-import RedstoneTorchRenderer from './renderers/RedstoneTorchRenderer'
+import Block from './Block'
+import RedstoneTorchRenderer from './Renderers/RedstoneTorchRenderer'
 
-export default class RedstoneTorch implements SimulationBlock {
-  position = [0, 0, 0]
-
-  colorGroup?: number = undefined
+export default class RedstoneTorch extends Block {
   renderer = RedstoneTorchRenderer
 
-  facing?: Facing = Facing.Down
-  state?: boolean = undefined
-  locked?: boolean = undefined
-  subtract?: boolean = undefined
+  transparent = true
 
-  constructor(position: number[], facing?: Facing) {
-    this.position = position
-    this.facing = facing
+  getName() {
+    return 'Redstone Torch'
   }
 
-  use(): void {
-    throw new Error('Method not implemented.')
+  onUse() {
+    console.log('onUse', this)
   }
 }

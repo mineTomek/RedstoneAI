@@ -37,7 +37,7 @@ export default function Button(props: {
       } outline outline-offset-[-1px] outline-4 hover:outline-offset-4 active:outline-offset-[6px] active:outline-2`}
       onClick={() => props.onClick != undefined && props.onClick(router)}
     >
-      <div className='text-xl font-bold tracking-wide'>{props.text}</div>
+      <div className='text-xl font-bold tracking-wide text-white'>{props.text}</div>
       {props.icon && (
         <FontAwesomeIcon
           icon={props.icon}
