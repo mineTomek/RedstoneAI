@@ -1,9 +1,10 @@
-import { Edges, useGLTF } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei'
 import { ObjectMap } from '@react-three/fiber'
 import { useReducer, useState } from 'react'
 import * as THREE from 'three'
 import { GLTF } from 'three-stdlib'
 import Block from '../Block'
+import BlockOutline from './BlockOutline'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -56,24 +57,13 @@ export default function RedstoneTorchRenderer(props: {
       }}
       dispose={null}
     >
-      <mesh position={[0, -2.5 * pixelSize, 0]}>
-        <boxGeometry args={[4 * pixelSize, 11 * pixelSize, 4 * pixelSize]} />
-        <meshStandardMaterial
-          color={0x6dc53}
-          visible={false}
-        />
-        <Edges
-          visible={props.selection.selected}
-          scale={1}
-          renderOrder={1000}
-        >
-          <meshBasicMaterial
-            transparent
-            color='#000'
-            depthTest={false}
-          />
-        </Edges>
-      </mesh>
+      <BlockOutline
+        visible={props.selection.selected}
+        outlineColorMode='custom'
+        outlineColor='#000'
+        position={[0, -2.5 * pixelSize, 0]}
+        size={[4 * pixelSize, 11 * pixelSize, 4 * pixelSize]}
+      />
       <group position={[-0.5, -0.5, -0.5]}>
         <mesh
           castShadow
