@@ -1,5 +1,5 @@
 import { Direction } from './Direction'
-import generateColors from './utils/BlockColors'
+import getColor from './utils/BlockColors'
 
 export default class BlockState {
   redstonePower?: number
@@ -20,6 +20,6 @@ export default class BlockState {
   }
 
   getColorAsHex() {
-    return this.color ? generateColors(this.color) : undefined
+    return this.color ? getColor(this.color).color : undefined
   }
 }

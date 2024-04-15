@@ -1,6 +1,7 @@
 import { Edges, useTexture } from '@react-three/drei'
 import { useState } from 'react'
 import { NearestFilter } from 'three'
+import getColor from '../../utils/BlockColors'
 import Block from '../Block'
 
 export default function WoolBlockRenderer(props: {
@@ -44,6 +45,11 @@ export default function WoolBlockRenderer(props: {
         visible={props.selection.selected}
         scale={1}
         renderOrder={1000}
+        color={
+          getColor(props.block.blockState.color ?? 0).lightOutline
+            ? '#fff'
+            : '#000'
+        }
       >
         <meshBasicMaterial
           transparent
