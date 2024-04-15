@@ -2,6 +2,7 @@
 
 import { faCubes as simulationIcon } from '@fortawesome/free-solid-svg-icons'
 import Button, { ButtonColor } from './components/Button'
+import Footer from './components/Footbar'
 import Navbar from './components/Navbar'
 import Simulator from './simulation/Simulator'
 
@@ -32,6 +33,7 @@ export default function Home() {
             }}
           />
         </div>
+        <Footer />
       </div>
     </main>
   )
