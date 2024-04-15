@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     site: '@mineTomek',
     title: 'Redstonery',
     description: 'Redstone simulator',
-    images: ['public/thumbnail.png'],
+    images: ['thumbnail.png'],
     creator: 'mineTomek',
   },
 }
