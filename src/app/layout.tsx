@@ -7,6 +7,12 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Redstonery',
   description: 'Redstone simulator',
+  twitter: {
+    card: 'summary',
+    site: '@mineTomek',
+    title: 'Redstonery',
+    creator: 'mineTomek'
+  },
 }
 
 export default function RootLayout({
