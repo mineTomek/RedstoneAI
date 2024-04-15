@@ -11,7 +11,9 @@ export const metadata: Metadata = {
     card: 'summary',
     site: '@mineTomek',
     title: 'Redstonery',
-    creator: 'mineTomek'
+    description: 'Redstone simulator',
+    images: ['public/thumbnail.png'],
+    creator: 'mineTomek',
   },
 }
 
