@@ -7,6 +7,12 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Redstonery',
   description: 'Redstone simulator',
+  openGraph: {
+    title: 'Redstonery',
+    description: 'Redstone simulator',
+    images: ['thumbnail.png'],
+    url: 'https://redstonery.vercel.app/',
+  },
   twitter: {
     card: 'summary',
     site: '@mineTomek',
