@@ -31,7 +31,7 @@ export default function RedstoneTorchRenderer(props: {
   const pixelSize = 1 / 16
 
   const { nodes } = useGLTF(
-    `assets/models/redstone_torch_${
+    `assets/models/block/redstone_torch_${
       props.block.blockState.lit ?? false ? 'on' : 'off'
     }.gltf`
   ) as GLTFResult & ObjectMap

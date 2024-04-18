@@ -17,7 +17,7 @@ export default function WoolBlockRenderer(props: {
         : 0xffffff
       : props.block.blockState.getColorAsHex()!
 
-  const texture = useTexture('/assets/textures/block.png')
+  const texture = useTexture('/assets/textures/block/wool.png')
   texture.magFilter = NearestFilter
 
   return (
