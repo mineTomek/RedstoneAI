@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "blocks": {
+      "description": "A representation of a single block with its id, position and block state",
+      "title": "Title?",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "position": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "integer"
+              },
+              "y": {
+                "type": "integer"
+              },
+              "z": {
+                "type": "integer"
+              }
+            },
+            "required": ["x", "y", "z"]
+          },
+          "state": {
+            "type": "object",
+            "properties": {
+              "color": {
+                "type": "integer"
+              },
+              "facing": {
+                "type": "string",
+                "enum": ["up", "down", "north", "south", "east", "west"]
+              },
+              "lit": {
+                "type": "boolean"
+              },
+              "delay": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 4
+              },
+              "locked": {
+                "type": "boolean"
+              },
+              "comparatorMode": {
+                "type": "boolean"
+              },
+              "open": {
+                "type": "boolean"
+              },
+              "inverted": {
+                "type": "boolean"
+              }
+            },
+            "required": []
+          }
+        },
+        "required": ["id", "position", "state"]
+      }
+    }
+  },
+  "required": ["blocks"]
+}
