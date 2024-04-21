@@ -13,7 +13,7 @@ export default function Home() {
 
       <div className='px-6 grid md:grid-cols-2 h-[100dvh]'>
         <Simulator
-          circuit='clock'
+          circuit='tests'
           className='relative after:absolute after:bg-gradient-to-t after:from-gray-100 dark:after:from-gray-950 after:to-transparent after:bottom-0 after:w-full after:h-16'
         />
         <div className='h-[50dvh] md:h-auto text-center flex flex-col gap-12 md:justify-center md:gap-12'>

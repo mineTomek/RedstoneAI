@@ -1,0 +1,49 @@
+{
+  "$schema": "./schema.json",
+  "blocks": [
+    {
+      "id": "wool",
+      "position": {
+        "x": 0,
+        "y": -1,
+        "z": 1
+      },
+      "state": {
+        "color": 4
+      }
+    },
+    {
+      "id": "redstone_torch",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "state": {
+        "lit": false
+      }
+    },
+    {
+      "id": "wool",
+      "position": {
+        "x": 0,
+        "y": -1,
+        "z": 0
+      },
+      "state": {
+        "color": 1
+      }
+    },
+    {
+      "id": "repeater",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "state": {
+        "lit": false
+      }
+    }
+  ]
+}
