@@ -15,6 +15,12 @@ export async function GET(request: NextRequest) {
 
   const circuitPath = `${jsonDirectory}/${circuitName}.json`
 
+  if (!fs.existsSync(circuitPath) || circuitName === 'schema') {
+    return new NextResponse("Can't find the given circuit", {
+      status: 404,
+    })
+  }
+
   const fileContents = JSON.parse(
     await fs.promises.readFile(circuitPath, 'utf8')
   )
