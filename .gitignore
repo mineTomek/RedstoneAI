@@ -42,3 +42,6 @@ next-env.d.ts
 
 # bun file
 bun.lockb
+
+# idx
+.idx/dev.nix
