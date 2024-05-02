@@ -11,7 +11,7 @@ export default function Home() {
     <main className=''>
       <Navbar />
 
-      <div className='px-6 grid md:grid-cols-2 h-[100dvh]'>
+      <div className='pr-6 grid md:grid-cols-2 h-[100dvh]'>
         <Simulator
           circuit='tests'
           className='relative after:absolute after:bg-gradient-to-t after:from-gray-100 dark:after:from-gray-950 after:to-transparent after:bottom-0 after:w-full after:h-16'
