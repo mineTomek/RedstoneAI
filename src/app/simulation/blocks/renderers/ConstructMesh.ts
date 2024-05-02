@@ -104,8 +104,8 @@ function createMaterials(
     }
 
     const [x, y, u, v] = face.uv
-    // material.map!.offset.set(x / 16, y / 16)
-    // material.map!.repeat.set(faceSize.x / 16, faceSize.y / 16)
+    material.map!.offset.set(x / 16, y / 16)
+    material.map!.repeat.set(faceSize.x / 16, faceSize.y / 16)
 
     console.log(`--- ${faceNames[index]} ---`)
     console.log('UV', face.uv)
