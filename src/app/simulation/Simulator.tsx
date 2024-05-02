@@ -71,6 +71,14 @@ export default function Simulator(props: {
             : 0.1
         }
       />
+      <group
+        position={world.current
+          .getBlocks()
+          [selectedBlock === -1 ? 0 : selectedBlock].blockPos.convertToVector()}
+        visible={selectedBlock !== -1}
+      >
+        <axesHelper />
+      </group>
       {world.current.getBlocks().map((block, i) => {
         return (
           <block.renderer
