@@ -1,24 +1,23 @@
-import { useGLTF } from '@react-three/drei'
-import { ObjectMap } from '@react-three/fiber'
+import model_on from '$/models/block/redstone_torch.json'
+import model_off from '$/models/block/redstone_torch_off.json'
 import { useReducer, useState } from 'react'
-import * as THREE from 'three'
-import { GLTF } from 'three-stdlib'
 import Block from '../Block'
 import BlockOutline from './BlockOutline'
+import constructMesh from './ConstructMesh'
 
-type GLTFResult = GLTF & {
-  nodes: {
-    body: THREE.Mesh
-    nxGlow: THREE.Mesh
-    mesh_2: THREE.Mesh
-    mesh_2_1: THREE.Mesh
-    mesh_2_2: THREE.Mesh
-    mesh_2_3: THREE.Mesh
-    mesh_2_4: THREE.Mesh
-    nzGlow: THREE.Mesh
-    pzGlow: THREE.Mesh
-  }
-}
+// type GLTFResult = GLTF & {
+//   nodes: {
+//     body: THREE.Mesh
+//     nxGlow: THREE.Mesh
+//     mesh_2: THREE.Mesh
+//     mesh_2_1: THREE.Mesh
+//     mesh_2_2: THREE.Mesh
+//     mesh_2_3: THREE.Mesh
+//     mesh_2_4: THREE.Mesh
+//     nzGlow: THREE.Mesh
+//     pzGlow: THREE.Mesh
+//   }
+// }
 
 export default function RedstoneTorchRenderer(props: {
   block: Block
@@ -30,15 +29,15 @@ export default function RedstoneTorchRenderer(props: {
 
   const pixelSize = 1 / 16
 
-  const { nodes } = useGLTF(
-    `assets/models/block/redstone_torch_${
-      props.block.blockState.lit ?? false ? 'on' : 'off'
-    }.gltf`
-  ) as GLTFResult & ObjectMap
+  // const { nodes } = useGLTF(
+  //   `assets/models/block/redstone_torch_${
+  //     props.block.blockState.lit ?? false ? 'on' : 'off'
+  //   }.gltf`
+  // ) as GLTFResult & ObjectMap
 
-  ;(nodes.body.material as THREE.MeshStandardMaterial).color = new THREE.Color(
-    0xffffff
-  )
+  // ;(nodes.body.material as THREE.MeshStandardMaterial).color = new THREE.Color(
+  //   0xffffff
+  // )
 
   return (
     <group
@@ -64,7 +63,11 @@ export default function RedstoneTorchRenderer(props: {
         position={[0, -2.5 * pixelSize, 0]}
         size={[4 * pixelSize, 11 * pixelSize, 4 * pixelSize]}
       />
-      <group position={[-0.5, -0.5, -0.5]}>
+      <primitive
+        object={constructMesh(props.block.blockState.lit ?? false ? model_on : model_off)}
+        position={[-0.5, -0.5, -0.5]}
+      />
+      {/* <group position={[-0.5, -0.5, -0.5]}>
         <mesh
           castShadow
           receiveShadow
@@ -119,7 +122,7 @@ export default function RedstoneTorchRenderer(props: {
           geometry={nodes.mesh_2_4.geometry}
           material={nodes.mesh_2_4.material}
         />
-      </group>
+      </group> */}
     </group>
   )
 }
