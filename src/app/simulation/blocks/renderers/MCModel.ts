@@ -8,12 +8,12 @@ export interface ModelElement {
   to: number[]
 
   faces: {
-    down: ModelFace
-    up: ModelFace
-    north: ModelFace
-    south: ModelFace
-    west: ModelFace
-    east: ModelFace
+    down?: ModelFace
+    up?: ModelFace
+    north?: ModelFace
+    south?: ModelFace
+    west?: ModelFace
+    east?: ModelFace
   }
 }
 
