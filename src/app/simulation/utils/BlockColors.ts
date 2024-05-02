@@ -1,21 +1,21 @@
 export default function getColor(colorGroup: number) {
   return [
-    MinecraftColors.White,
-    MinecraftColors.LightGray,
-    MinecraftColors.DarkGray,
-    MinecraftColors.Black,
-    MinecraftColors.Red,
-    MinecraftColors.Orange,
-    MinecraftColors.Yellow,
-    MinecraftColors.LimeGreen,
-    MinecraftColors.Green,
-    MinecraftColors.LightBlue,
-    MinecraftColors.Cyan,
-    MinecraftColors.Blue,
-    MinecraftColors.Purple,
-    MinecraftColors.Magenta,
-    MinecraftColors.Pink,
-    MinecraftColors.Brown,
+    MinecraftColors.White, // 0
+    MinecraftColors.LightGray, // 1
+    MinecraftColors.DarkGray, // 2
+    MinecraftColors.Black, // 3
+    MinecraftColors.Red, // 4
+    MinecraftColors.Orange, // 5
+    MinecraftColors.Yellow, // 6
+    MinecraftColors.LimeGreen, // 7
+    MinecraftColors.Green, // 8
+    MinecraftColors.LightBlue, // 9
+    MinecraftColors.Cyan, // 10
+    MinecraftColors.Blue, // 11
+    MinecraftColors.Purple, // 12
+    MinecraftColors.Magenta, // 13
+    MinecraftColors.Pink, // 14
+    MinecraftColors.Brown, // 15
   ][colorGroup]
 }
 
