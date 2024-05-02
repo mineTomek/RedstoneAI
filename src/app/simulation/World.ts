@@ -1,5 +1,6 @@
 import Block from './blocks/Block'
 import RedstoneTorch from './blocks/RedstoneTorch'
+import Repeater from './blocks/Repeater'
 import WoolBlock from './blocks/WoolBlock'
 import Circuit from './Circuit'
 import Position from './Position'
@@ -20,6 +21,9 @@ export default class World {
       switch (block.id) {
         case 'redstone_torch':
           this.blocks.push(new RedstoneTorch(block.state, block.position, this))
+          break
+        case 'repeater':
+          this.blocks.push(new Repeater(block.state, block.position, this))
           break
         case 'wool':
         default:
